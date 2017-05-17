@@ -155,6 +155,17 @@ class SkybetAPI {
   }
 
   /**
+   * Clear endpoints chain
+   *
+   * @return \Sharapov\SkybetPHP\SkybetAPI
+   */
+  public function clear() {
+    $this->_endpoint = null;
+
+    return $this;
+  }
+
+  /**
    * Get JSON response
    *
    * @return mixed
