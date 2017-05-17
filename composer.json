@@ -3,7 +3,7 @@
     "description": "A simple PHP implementation for Skybet's JSON API",
     "type": "library",
     "license": "GPL-3.0",
-    "keywords": ["Skybet", "API", "REST+JSON", "JSON", "Bookmaker", "Odds", "Betting"],
+    "keywords": ["Skybet", "API", "REST", "JSON", "Bookmaker", "Odds", "Betting"],
     "homepage": "http://sharapov.biz/",
     "authors": [
         {
