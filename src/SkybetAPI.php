@@ -11,7 +11,9 @@ namespace Sharapov\SkybetPHP;
 
 class SkybetAPI {
 
-  private $_baseUri = "https://services.skybet.com/sportsapi/v2";
+  private $_baseUri = "https://services.skybet.com";
+
+  private $_sportApi = "/sportsapi/v2";
 
   private $_timeout = 5;
 
@@ -89,7 +91,7 @@ class SkybetAPI {
    * @return $this
    */
   public function classes() {
-    $this->_endpoint                 = '/a-z';
+    $this->_endpoint                 = $this->_sportApi.'/a-z';
     $this->_endpointResponseKeyField = 'event_classes';
 
     return $this;
@@ -98,18 +100,35 @@ class SkybetAPI {
   /**
    * Get event document
    *
-   * @param int $eventId
+   * @param int  $eventId
    * @param bool $getPrimaryMarket
    *
    * @return $this
    */
   public function event( $eventId, $getPrimaryMarket = false ) {
-    $this->_endpoint = '/event/' . $eventId;
+    $this->_endpoint = $this->_sportApi.'/event/' . $eventId;
     if ( $getPrimaryMarket ) {
       $this->_endpoint .= '/primary-market';
     }
 
     return $this;
+  }
+
+  /**
+   * Set the full url to be requested to skybet
+   *
+   * @param            $url
+   * @param array|null $b
+   *
+   * @return \Sharapov\SkybetPHP\SkybetAPI
+   * @throws \Sharapov\SkybetPHP\SkybetAPIException
+   */
+  public function setRequestUrl( $url, array $b = null ) {
+    if ( ! is_null( $this->_endpoint ) ) {
+      throw new SkybetAPIException( "You can't loop class by this method" );
+    }
+
+    return new SkybetAPI( $this->_arrayMerge( $this->_queryParams, $b ), $url );
   }
 
   /**
